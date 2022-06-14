@@ -1,22 +1,12 @@
 import axios from 'axios'
 import { useState } from 'react'
-import { useRouter } from 'next/router'
 
 export default function Todo ({ todo, getTodos }) {
 	const [checked, setChecked] = useState('')
-	const router = useRouter()
-	const refresh = async () => {
-		await router.replace(router.asPath)
-		await router.replace(router.asPath)
-
-	}
 	const handleCheck = async (e) => {
 		const result = await axios.delete('http://localhost:3000/api/deleteTodo', {data: {id: todo._id}})
-		// setChecked(e.target)
+		setChecked(e)
 		await getTodos(todo.email)
-		// await router.replace(router.asPath)
-		await refresh()
-		console.log('refresh done')
 	}
 
 	return (

@@ -5,13 +5,12 @@ import Todo from '../Components/Todo'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import AccessDenied from '../Components/AccessDenied'
 import Typical from 'react-typical'
-import { useRouter } from 'next/router'
 
 export async function getServerSideProps (context) {
 	const { getSession } = require('next-auth/react')
 	const req = context.req
 	const session = await getSession({ req })
-	if(session) {
+	if (session) {
 		console.log('gssp called')
 		const { MongoClient } = require('mongodb')
 		const url = 'mongodb+srv://kshipra:12345@w3dev-todo.b4tyc.mongodb.net/?retryWrites=true&w=majority'
@@ -29,12 +28,11 @@ export async function getServerSideProps (context) {
 		}
 	}
 	return {
-		props: {
-		}
+		props: {}
 	}
 }
 
-const Home = ({data}) => {
+const Home = ({ data }) => {
 	// console.log(data)
 	const { data: session } = useSession()
 	const [todos, setTodos] = useState([])
@@ -43,32 +41,30 @@ const Home = ({data}) => {
 		if (session) {
 			// console.log(session)
 			const fetchTodos = async () => {
-				await getAllTodos(session.user.email)
+				await setInitialTodos()
 			}
 			fetchTodos()
 		}
 	}, [session])
-	const router = useRouter()
-	const getAllTodos = async (email) => {
-		// const data = await axios.get(`http://localhost:3000/api/getTodos?email=${ email }`)
-		await router.replace(router.asPath)
-		// console.log(data)
+	const setInitialTodos = async () => {
 		setTodos(data)
-		console.log(todos)
+	}
+	const getAllTodos = async (email) => {
+		const curr_data = await axios.get(`http://localhost:3000/api/getTodos?email=${ email }`)
+		setTodos(curr_data.data)
+
 	}
 	const handleInputChange = (e) => {
 		setCurrentTodo(e.target.value)
 	}
 	const handleFormSubmit = async (e) => {
 		e.preventDefault()
-		// console.log(currentTodo)
 		const request = {
 			'todo': currentTodo
 		}
 		if (currentTodo) {
 			const response = await axios.post('http://localhost:3000/api/setTodo', request)
 			await getAllTodos(session.user.email)
-			await router.replace(router.asPath)
 			setCurrentTodo('')
 		}
 	}
