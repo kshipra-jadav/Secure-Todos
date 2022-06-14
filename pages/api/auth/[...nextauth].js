@@ -1,15 +1,15 @@
 import NextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
-import creds from './credentials.json'
 
 const options = {
 	providers: [
 		GoogleProvider({
-			clientId: creds.web.client_id,
-			clientSecret: creds.web.client_secret
+			clientId: process.env.GOOGLE_ID,
+			clientSecret: process.env.GOOGLE_SECRET
 		})
 	],
-	debug: false
+	debug: false,
+	secret: process.env.SECRET
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
