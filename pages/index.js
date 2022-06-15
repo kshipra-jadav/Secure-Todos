@@ -38,8 +38,8 @@ export async function getServerSideProps (context) {
 	}
 }
 
-// const domain = 'https://todo-w3dev-final.vercel.app/'
-const domain = 'http://localhost:3000'
+const domain = 'https://todo-w3dev-final.vercel.app/'
+// const domain = 'http://localhost:3000'
 
 const Home = ({ data }) => {
 	// console.log(data)
