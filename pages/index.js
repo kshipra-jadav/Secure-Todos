@@ -56,6 +56,7 @@ const Home = ({ data }) => {
 		}
 	}, [session])
 	const setInitialTodos = async () => {
+		console.log('set initial called')
 		setTodos(data)
 	}
 	const getAllTodos = async (email) => {

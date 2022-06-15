@@ -9,7 +9,6 @@ export default async function handler(req, res){
 	} else{
 		const mail = session.user.email
 		const todo = req.body.todo
-
 		await collection.insertOne({email: mail, todo: todo})
 		res.status(201).send("Data inserted successfully.")
 	}
