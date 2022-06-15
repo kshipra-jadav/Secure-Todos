@@ -92,7 +92,7 @@ const Home = ({ data }) => {
 				<div className="flex items-center justify-center font-poppins w-full min-h-screen absolute bg-lighterlavender ">
 					<div className="grid grid-cols-1 gap-14 place-items-stretch w-1/2 pb-80">
 						<div className="text-4xl font-bold text-center flex flex-row items-center justify-center">
-							Let's Get Planning,    { session.user.name }
+							Start Your Planning Your Day Here,    { session.user.name }
 						</div>
 						<div>
 							<form className="flex gap-11 flex-col items-center justify-center"
