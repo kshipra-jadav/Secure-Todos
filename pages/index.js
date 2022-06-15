@@ -4,7 +4,13 @@ import { useState, useEffect } from 'react'
 import Todo from '../Components/Todo'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import AccessDenied from '../Components/AccessDenied'
-import Typical from 'react-typical'
+import dynamic from 'next/dynamic'
+
+// const Typical = dynamic(() => {
+// 			import('react-typical')
+// 		},
+// 		{ssr: false}
+// )
 
 export async function getServerSideProps (context) {
 	const { getSession } = require('next-auth/react')
@@ -32,7 +38,8 @@ export async function getServerSideProps (context) {
 	}
 }
 
-const domain = 'https://todo-w3dev-final.vercel.app/'
+// const domain = 'https://todo-w3dev-final.vercel.app/'
+const domain = 'http://localhost:3000'
 
 const Home = ({ data }) => {
 	// console.log(data)
@@ -71,20 +78,6 @@ const Home = ({ data }) => {
 		}
 	}
 
-	const typingElements = [
-		'Let\'s Get Productive! 💯 ',
-		2000,
-		'You Can Do It! 🤝🏾 ',
-		2000,
-		'Here are Your To-Do\'s ',
-		2000,
-		'Hello There 👀 ',
-		2000,
-		'Let\'s Start Planning ',
-		2000,
-		'List Down Your Goals Here 🔥 ',
-		2000
-	]
 
 	if (!session) return <AccessDenied/> // if not logged in then deny access
 	// else, allow access
@@ -98,15 +91,8 @@ const Home = ({ data }) => {
 				</Head>
 				<div className="flex items-center justify-center font-poppins w-full min-h-screen absolute bg-lighterlavender ">
 					<div className="grid grid-cols-1 gap-14 place-items-stretch w-1/2 pb-80">
-						<div className="text-4xl font-bold text-center flex flex-row">
-							<div style={ { width: '20em' } }>
-								<Typical
-										steps={ typingElements }
-										loop={ Infinity }
-										wrapper="p"
-								/>
-							</div>
-							{ session.user.name }
+						<div className="text-4xl font-bold text-center flex flex-row items-center justify-center">
+							Let's Get Planning,    { session.user.name }
 						</div>
 						<div>
 							<form className="flex gap-11 flex-col items-center justify-center"
