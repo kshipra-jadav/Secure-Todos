@@ -60,7 +60,7 @@ const Home = ({ data }) => {
 		setTodos(data)
 	}
 	const getAllTodos = async (email) => {
-		const curr_data = await axios.get(`${domain}/api/getTodos?email=${ email }`)
+		const curr_data = await axios.get(`${ domain }/api/getTodos?email=${ email }`)
 		setTodos(curr_data.data)
 
 	}
@@ -73,9 +73,10 @@ const Home = ({ data }) => {
 			'todo': currentTodo
 		}
 		if (currentTodo) {
-			const response = await axios.post(`${domain}/api/setTodo`, request)
+			const response = await axios.post(`${ domain }/api/setTodo`, request)
 			await getAllTodos(session.user.email)
 			setCurrentTodo('')
+			await getAllTodos(session.user.email)
 		}
 	}
 
@@ -93,7 +94,7 @@ const Home = ({ data }) => {
 				<div className="flex items-center justify-center font-poppins w-full min-h-screen absolute bg-lighterlavender ">
 					<div className="grid grid-cols-1 gap-14 place-items-stretch w-1/2 pb-80">
 						<div className="text-4xl font-bold text-center flex flex-row items-center justify-center">
-							Start Your Planning Your Day Here,    { session.user.name }
+							Start Your Planning Your Day Here, { session.user.name }
 						</div>
 						<div>
 							<form className="flex gap-11 flex-col items-center justify-center"
@@ -116,7 +117,8 @@ const Home = ({ data }) => {
 							<table className="flex flex-col justify-center gap-5 pt-5 pb-5 text-xl bg-lighterblue rounded-2xl w-full">
 								<tbody className="flex flex-col justify-center gap-5 pt-5 pb-5 text-xl bg-lighterblue rounded-2xl w-full">
 								{
-									todos.map(todo => <Todo todo={ todo } key={ todo._id } getTodos={ getAllTodos } domain = {domain}/>)
+									todos.map(todo => <Todo todo={ todo } key={ todo._id } getTodos={ getAllTodos }
+															domain={ domain }/>)
 
 								}
 								</tbody>

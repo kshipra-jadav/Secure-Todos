@@ -1,6 +1,8 @@
 import { signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import AccessDenied from './AccessDenied'
+import DataDownload from './DataDownload'
+import DataUpload from './DataUpload'
 
 export default function Header () {
 	const { data: session } = useSession()
@@ -18,7 +20,7 @@ export default function Header () {
 							</div>
 						</div>
 						<div className="grid grid-cols-2 items-center content-center justify-center px-10 border border-double border-8 border-t-lighterlavender border-b-lighterlavender border-r-lighterlavender border-l-gray-500">
-							<div className="ml-24">
+							<div className="ml-12  grid grid-cols-3 gap-4 w-full">
 								<button className="px-4 py-4 text-xl font-bold bg-amber-200 hover:bg-amber-400 duration-300 text-center rounded-2xl"
 										onClick= {(e) => {
 											e.preventDefault()
@@ -26,6 +28,8 @@ export default function Header () {
 										}} >
 									Sign Out
 								</button>
+								<DataDownload email={session.user.email} />
+								<DataUpload />
 							</div>
 
 							<div className="border border-solid border-4 border-black my-2 border-t-lighterlavender border-b-lighterlavender border-l-gray-500 border-r-gray-500 ml-52">

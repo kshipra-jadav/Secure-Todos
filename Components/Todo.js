@@ -1,11 +1,8 @@
 import axios from 'axios'
-import { useState } from 'react'
 
 export default function Todo ({ todo, getTodos, domain }) {
-	const [checked, setChecked] = useState('')
 	const handleCheck = async (e) => {
 		const result = await axios.delete(`${domain}/api/deleteTodo`, {data: {id: todo._id}})
-		// setChecked(e)
 		await getTodos(todo.email)
 	}
 
